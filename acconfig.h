@@ -1,0 +1,3 @@
+#undef PREFIX
+#undef FUSEINST
+

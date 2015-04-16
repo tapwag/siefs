@@ -1,0 +1,24 @@
+Version 0.5:
+- siefs is moved to fuse-2 architecture
+- support for filenames with non-US characters
+- iocharset mount option
+- better performance with USB cables
+- small bugfixes
+
+Version 0.4:
+- support for Siemens x65 series
+- improved performance for Siemens x55 and x60 series
+
+Version 0.2:
+- fuse is not part of siefs anymore. Please download latest version
+of fuse from the project site (http://sourceforge.net/projects/fuse)
+- support for new Siemens phones
+- added converter of voice memo records to wav format
+- default speed increased from 57600 to 115200 baud
+- now siefs can restore parameters of communication port if they was
+changed by other program
+- link reliability is improved significantly. Short link failures
+do not cause file transfer to abort. There is no need to mount/umount
+filesystem or eject/insert cable in the case of link failure
+- numerous bugfixes
+

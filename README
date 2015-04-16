@@ -1,0 +1,79 @@
+This is SieFS - a virtual filesystem for accessing Siemens
+mobile phones' memory (flexmem or MultiMediaCard) from
+Linux. Now you can mount your phone (by datacable or IRDA)
+and work with it like with any other removable storage.
+
+SieFS was tested on
+- S45, ME45, SL45
+- SL55, M55, MC60
+- CX65, M65, C65, S65
+
+It should work also on C55/M50/MT50 models with enabled
+serial interface (developer pack). There should not be any
+problems with other new Siemens phones.
+
+SieFS consists of filesystem module (siefs), command-line
+utility (slink) and voice memo converter (vmo2wav).
+
+SieFS depends on Filesystem in USErspace (FUSE) package.
+Download it from http://sourceforge.net/projects/fuse . 
+
+
+The syntax of mount command is:
+
+	mount -t siefs [-o options] COMM_DEVICE MOUNT_DIR
+
+COMM_DEVICE is /dev/ttyS0, /dev/ttyS1... for COM cables, or
+/dev/ttyUSB0, /dev/ttyUSB1... for USB cables.
+
+Options are:
+
+	baudrate=<value>	set communication speed to value.
+				Supported values are 9600, 19200,
+				38400, 57600, 115200. By default,
+				115200 is used. You can try higher
+				speeds (230400 and 460800). Special
+				value 0 means no speed changing.
+				Note that SL45 doesn't support this
+				option.
+	uid=<value>
+	gid=<value>
+	umask=<value>		set user ID, group ID and
+				umask value for mounted
+				files. See man mount(8)
+
+	iocharset=<charset>	use specified charset for filename
+				conversion. Default is UTF8.
+
+	nohide			do not hide 'telecom' directory.
+				'telecom' is a virtual directory
+				that contains your address book
+				records and calendar events.
+				By default, it is not shown, but
+				anyway you can cd into it. 
+				Not all phones have this directory.
+
+	device=<device>		set communication device. May be
+				useful in fstab (first parameter
+				in fstab in this case will be
+				/proc/fs/fuse/dev).
+
+You can enter mount command when your mobile is not connected to PC.
+Also you can connect and disconnect it at any time without need to
+remount filesystem.
+
+For automatic mounting, add something like this to your /etc/fstab:
+
+ /proc/fs/fuse/dev   /mnt/mobile   siefs   device=/dev/ttyS0   0 0
+
+
+slink is an utility for working with phone's memory without mounting.
+Type `slink -h' to view all supported commands.
+
+vmo2wav is a converter of voice memo (dictaphone) records to wav format.
+
+
+
+Comments, wishes and bug reports are welcome.
+Dmitry Zakharov aka ChaoS <dmitry-z@mail.ru>
+
